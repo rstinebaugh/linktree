@@ -1,0 +1,36 @@
+{
+    "name": "Ryan Stinebaugh",
+    "avatar": "",
+    "links": [
+      {
+        "title": "My Portfolio",
+        "href": "https://ryanstinebaugh.com",
+        "image": "/static/images/Headshot_Ryan.jpeg"
+      },
+      {
+        "title": "Phone Contact",
+        "href": "/static/RyanStinebaugh.vcf",
+        "image": "/static/images/Headshot_Ryan.jpeg"
+      },
+      {
+        "title": "Pacto Medical",
+        "href": "https://www.pactomedical.com",
+        "image": "/static/images/Headshot_Ryan.jpeg"      
+      },
+      {
+        "title": "Glorious Gaming",
+        "href": "https://www.gloriousgaming.com",
+        "image": "/static/images/Headshot_Ryan.jpeg"      
+      }
+    ],
+    "socials": [
+      {
+        "title": "LinkedIn",
+        "href": "https://www.linkedin.com/in/ryanstinebaugh/"
+      },
+      {
+        "title": "Github",
+        "href": "https://github.com/rstinebaugh"
+      }
+    ]
+}

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { get } from '@vercel/edge-config';
 import { redirect } from 'next/navigation';
+import data from '../data.json';
 
 export const dynamic = 'force-dynamic',
   runtime = 'edge';
@@ -29,6 +30,17 @@ function TwitterIcon() {
   );
 }
 
+function LinkedInIcon() {
+  return (
+    <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="30" 
+    height="30"
+    fill="currentColor" 
+    viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+  );
+}
+
 function GitHubIcon() {
   return (
     <svg
@@ -53,6 +65,17 @@ function GitHubIcon() {
   );
 }
 
+function PhoneIcon() {
+return (
+   <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    data-name="1" 
+    viewBox="0 0 128 128" 
+    id="phone"><path 
+    fill="currentColor" d="M98 63V9.75A7.9 7.9 0 0 0 90 2H38a7.9 7.9 0 0 0-8 7.75v108.5a7.9 7.9 0 0 0 8 7.75h52a7.9 7.9 0 0 0 8-7.75Z"></path><path fill="#757575" d="M90 0H38a9.89 9.89 0 0 0-10 9.75v108.5A9.89 9.89 0 0 0 38 128h52a9.89 9.89 0 0 0 10-9.75V9.75A9.89 9.89 0 0 0 90 0Zm6 118.25a5.89 5.89 0 0 1-6 5.75H38a5.89 5.89 0 0 1-6-5.75V9.75A5.89 5.89 0 0 1 38 4h10a4.16 4.16 0 0 0 4 4h24a4.3 4.3 0 0 0 4-4h10a5.89 5.89 0 0 1 6 5.75Z"></path></svg>
+  )
+}
+
 function LinkCard({
   href,
   title,
@@ -67,11 +90,11 @@ function LinkCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center p-1 w-full rounded-md hover:scale-105 transition-all bg-gray-100 mb-3 max-w-3xl"
+      className="flex items-center p-1 w-full rounded-md hover:scale-105 transition-all mb-3 max-w-3xl"
     >
-      <div className="flex text-center w-full">
-        <div className="w-10 h-10">
-          {image && (
+      <div className="flex bg-white rounded-xl text-center w-full ">
+        <div className="ml-3 flex w-10 h-10">
+          {/*{image && (
             <Image
               className="rounded-sm"
               alt={title}
@@ -79,9 +102,9 @@ function LinkCard({
               width={40}
               height={40}
             />
-          )}
+          )}*/}
         </div>
-        <h2 className="flex justify-center items-center font-semibold w-full text-gray-700 -ml-10">
+        <h2 className="flex justify-center items-center font-semibold w-full -ml-10">
           {title}
         </h2>
       </div>
@@ -108,11 +131,11 @@ interface Social {
 }
 
 export default async function HomePage() {
-  const data: Data | undefined = await get('linktree');
+  // const data: Data | undefined = await get('linktree');
 
   if (!data) {
     // not working yet https://github.com/vercel/next.js/issues/44232
-    redirect('https://linktr.ee/selenagomez');
+    redirect('https://www.ryanstinebaugh.com');
   }
 
   return (
@@ -121,15 +144,15 @@ export default async function HomePage() {
         priority
         className="rounded-full"
         alt={data.name}
-        src={data.avatar}
+        src={'/static/images/Headshot_Ryan.jpeg'}
         width={96}
         height={96}
       />
-      <h1 className="font-bold mt-4 mb-8 text-xl text-white">{data.name}</h1>
+      <h1 className="font-bold mt-4 mb-8 text-xl text-white ">{data.name}</h1>
       {data.links.map((link) => (
         <LinkCard key={link.href} {...link} />
       ))}
-      <div className="flex items-center gap-4 mt-8 text-white">
+      <div className="flex items-center gap-4 mt-8 ">
         {data.socials.map((social) => (
           <a
             aria-label={`${social.title} link`}
@@ -137,10 +160,11 @@ export default async function HomePage() {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
+            className="text-white"
           >
-            {social.href.includes('twitter') ? (
-              <TwitterIcon />
-            ) : social.href.includes('github') ? (
+            {social.title.includes('LinkedIn') ? (
+              <LinkedInIcon />
+            ) : social.title.includes('Github') ? (
               <GitHubIcon />
             ) : null}
           </a>
